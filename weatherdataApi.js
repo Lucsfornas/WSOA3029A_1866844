@@ -1,4 +1,4 @@
-fetch("https://covid-19-data.p.rapidapi.com/totals?format=json", {
+fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD&format=json&date=2020-07-21", {
     "method": "GET",
     "headers": {
         "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
@@ -11,3 +11,4 @@ fetch("https://covid-19-data.p.rapidapi.com/totals?format=json", {
     .catch(err => {
         console.log(err);
     });
+
