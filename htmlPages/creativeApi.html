@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script type="module" src="../weatherdataApi.js"></script>
+
 </head>
 
 <body>
@@ -41,8 +41,11 @@
     </nav>
 
     <h1>data test</h1>
-    <p>active: <span id="act"></span><br></p>
-    <p>confirmed: <span id="conf"></span><br></p>
+    <p>Active: <span id="act"></span></p>
+    <p>Confirmed: <span id="conf"></span></p>
+    <p>Critical: <span id="crit"></span></p>
+    <p>Deaths: <span id="det"></span></p>
+    <p>Recovered: <span id="rec"></span></p>
 
     <div id="mydata"></div>
 
@@ -50,45 +53,100 @@
     <canvas id="chart" width="400" height="400"></canvas>
 
     <script>
-        const stats = document.getElementById('act');
+        var activeppl = 0;
+        var confirmedppl = 0;
+        var criticalppl = 0;
+        var deadppl = 0;
+        var recoveredppl = 0;
 
-        const ctx = document.getElementById('chart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Active', 'Confirmed', 'Deaths', 'Recovered', 'Critical'],
-                datasets: [{
-                    label: 'Covid-19 statistics',
-                    data: [stats, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+        var valuesdata;
+
+        drawtable();
+
+        async function getstats(valuesdata) {
+            fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD&format=json&date=2020-07-21", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
+                    "x-rapidapi-key": "a78061f88cmsh3a84dcb9ef4c1c2p1d23f7jsna50cfba9f86c"
                 }
+            })
+                .then(response => {
+                    return response.json();
+                })
+
+                .then(function (data) {
+                    console.log(data);
+                    handledata(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+            const handledata = (data) => {
+                document.getElementById('act').innerText = data[0].active;
+                document.getElementById('conf').innerText = data[0].confirmed;
+                document.getElementById('crit').innerText = data[0].critical;
+                document.getElementById('det').innerText = data[0].deaths;
+                document.getElementById('rec').innerText = data[0].recovered;
+                activeppl = data[0].active;
+                confirmedppl = data[0].confirmed;
+                criticalppl = data[0].critical;
+                deadppl = data[0].deaths;
+                recoveredppl = data[0].recovered;
+                valuesdata = [activeppl, confirmedppl, criticalppl, deadppl, recoveredppl]
+                console.log(valuesdata);
+
+
             }
-        });
+        }
+
+
+
+
+        async function drawtable() {
+            await getstats();
+            var activate;
+            document.getElementById('act').innerText = parseInt(activate);
+
+            const ctx = document.getElementById('chart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Active', 'Confirmed', 'Deaths', 'Recovered', 'Critical'],
+                    datasets: [{
+                        label: 'Covid-19 statistics',
+                        data: [activate, 12],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
     </script>
 
     <script src="../movement.js"></script>

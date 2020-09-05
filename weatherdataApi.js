@@ -1,4 +1,4 @@
-
+const activeppl = 0;
 
 fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD&format=json&date=2020-07-21", {
     "method": "GET",
@@ -12,24 +12,22 @@ fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD
     })
 
     .then(function (data) {
-        appendData(data);
+        console.log(data);
+        handledata(data);
     })
     .catch(err => {
         console.log(err);
     });
 
-
-function appendData(data) {
-    const maincontainer = document.getElementById('act');
-    for (var i = 0; i < data.length; i++) {
-        var div = document.createElement("div");
-        div.innerHTML = 'Active ' + data[i].active;
-        div.innerHTML = 'Confirmed ' + data[i].confirmed;
-        div.innerHTML = 'Critical ' + data[i].critical;
-        div.innerHTML = 'Date ' + data[i].date;
-        div.innerHTML = 'Deaths ' + data[i].deaths;
-        div.innerHTML = 'Recovered ' + data[i].recovered;
-        maincontainer.appendChild(div);
-    }
+const handledata = (data) => {
+    document.getElementById('act').innerText = data[0].active;
+    document.getElementById('conf').innerText = data[0].confirmed;
+    document.getElementById('crit').innerText = data[0].critical;
+    document.getElementById('det').innerText = data[0].deaths;
+    document.getElementById('rec').innerText = data[0].recovered;
+    activeppl = data[0].active;
+    console.log(activeppl);
 }
+
+
 
