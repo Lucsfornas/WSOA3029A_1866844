@@ -56,12 +56,6 @@
         var valuesdata = [];
         getstats();
 
-
-
-
-
-
-
         function getstats() {
             fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD&format=json&date=2020-07-21", {
                 "method": "GET",
@@ -106,9 +100,7 @@
             }
         }
 
-
         drawtable();
-
 
         function drawtable() {
             var stats = valuesdata;
