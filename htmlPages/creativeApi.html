@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="../weatherdataApi.js"></script>
+    <script type="module" src="../weatherdataApi.js"></script>
 </head>
 
 <body>
@@ -50,14 +50,16 @@
     <canvas id="chart" width="400" height="400"></canvas>
 
     <script>
+        const stats = document.getElementById('act');
+
         const ctx = document.getElementById('chart').getContext('2d');
         const myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Active', 'Confirmed', 'Deaths', 'Recovered', 'Critical'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: 'Covid-19 statistics',
+                    data: [stats, 19, 3, 5, 2, 3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
