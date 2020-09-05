@@ -53,17 +53,16 @@
     <canvas id="chart" width="400" height="400"></canvas>
 
     <script>
-        var activeppl = 0;
-        var confirmedppl = 0;
-        var criticalppl = 0;
-        var deadppl = 0;
-        var recoveredppl = 0;
+        var valuesdata = [];
+        getstats();
 
-        var valuesdata;
 
-        drawtable();
 
-        async function getstats(valuesdata) {
+
+
+
+
+        function getstats() {
             fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD&format=json&date=2020-07-21", {
                 "method": "GET",
                 "headers": {
@@ -89,12 +88,18 @@
                 document.getElementById('crit').innerText = data[0].critical;
                 document.getElementById('det').innerText = data[0].deaths;
                 document.getElementById('rec').innerText = data[0].recovered;
+                var activeppl = 0;
+                var confirmedppl = 0;
+                var criticalppl = 0;
+                var deadppl = 0;
+                var recoveredppl = 0;
                 activeppl = data[0].active;
                 confirmedppl = data[0].confirmed;
                 criticalppl = data[0].critical;
                 deadppl = data[0].deaths;
                 recoveredppl = data[0].recovered;
                 valuesdata = [activeppl, confirmedppl, criticalppl, deadppl, recoveredppl]
+                drawtable();
                 console.log(valuesdata);
 
 
@@ -102,13 +107,11 @@
         }
 
 
+        drawtable();
 
 
-        async function drawtable() {
-            await getstats();
-            var activate;
-            document.getElementById('act').innerText = parseInt(activate);
-
+        function drawtable() {
+            var stats = valuesdata;
             const ctx = document.getElementById('chart').getContext('2d');
             const myChart = new Chart(ctx, {
                 type: 'bar',
@@ -116,7 +119,7 @@
                     labels: ['Active', 'Confirmed', 'Deaths', 'Recovered', 'Critical'],
                     datasets: [{
                         label: 'Covid-19 statistics',
-                        data: [activate, 12],
+                        data: stats,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
