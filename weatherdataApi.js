@@ -6,9 +6,17 @@ fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD
     }
 })
     .then(response => {
-        console.log(response);
+        return response.json();
+    })
+
+    .then(function (data) {
+        appendData(data);
     })
     .catch(err => {
         console.log(err);
     });
+
+function appendData(data) {
+
+}
 
