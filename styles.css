@@ -109,6 +109,23 @@ opacity: 0;
     transform: rotate(45deg) translate(-5px,-6px);
 }
 
-.writing{
-    color:black;
+.orange{
+    color: orange;
+    text-shadow: 1px 4px rgba(0, 0, 0, 0.6);
+}
+.backgroundcol{
+    background: papayawhip;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+
+}
+
+p{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+font-weight: 600;
+
 }

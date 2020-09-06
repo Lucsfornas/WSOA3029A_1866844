@@ -24,7 +24,7 @@
                 <a href="../index.html">Home</a>
             </li>
             <li>
-                <a href="./htmlPages/About.html">About</a>
+                <a href="./About.html">About</a>
             </li>
             <li>
                 <a href="creativeApi.html">Creative Api Page</a>
@@ -40,15 +40,17 @@
         </div>
     </nav>
 
-    <h1>data test</h1>
-    <p>Active: <span id="act"></span></p>
-    <p>Confirmed: <span id="conf"></span></p>
-    <p>Critical: <span id="crit"></span></p>
-    <p>Deaths: <span id="det"></span></p>
-    <p>Recovered: <span id="rec"></span></p>
-
-    <div id="mydata"></div>
-
+    <section class="backgroundcol">
+        <h1 class="orange">Covid-19 API Data</h1>
+    </section>
+    <br>
+    <section class="backgroundcol">
+        <p>Active: <span id="act"></span></p>
+        <p>Confirmed: <span id="conf"></span></p>
+        <p>Critical: <span id="crit"></span></p>
+        <p>Deaths: <span id="det"></span></p>
+        <p>Recovered: <span id="rec"></span></p>
+    </section>
 
     <canvas id="chart" width="400" height="400"></canvas>
 
@@ -110,7 +112,7 @@
                 data: {
                     labels: ['Active', 'Confirmed', 'Deaths', 'Recovered', 'Critical'],
                     datasets: [{
-                        label: 'Covid-19 statistics',
+                        label: 'Bar Graph Showing Covid-19 World Statistics',
                         data: stats,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
