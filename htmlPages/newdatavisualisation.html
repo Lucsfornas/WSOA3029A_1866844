@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Data Visualisation as a Donut</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,700;1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <h4>The Guide</h4>
+        </div>
+        <ul class="navlinks">
+            <li>
+                <a href="../index.html">Home</a>
+            </li>
+            <li>
+                <a href="./About.html">About</a>
+            </li>
+            <li>
+                <a href="./creativeApi.html">Creative Api Page</a>
+            </li>
+            <li>
+                <a href="./WSOAblogs.html">WSOA3029 Blogs</a>
+            </li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div id="my_donutvis"></div>
+
+
+    <script>
+
+        // set the dimensions and margins of the graph
+        var width = 450
+        height = 450
+        margin = 40
+
+        // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+        var radius = Math.min(width, height) / 2 - margin
+
+        // append the svg object to the div called 'my_dataviz'
+        var svg = d3.select("#my_donutvis")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        // Create dummy data
+        var data = { a: 9, b: 20, c: 30, d: 8, e: 12 }
+
+        // set the color scale
+        var color = d3.scaleOrdinal()
+            .domain(data)
+            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"])
+
+        // Compute the position of each group on the pie:
+        var pie = d3.pie()
+            .value(function (d) { return d.value; })
+        var data_ready = pie(d3.entries(data))
+
+        // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+        svg
+            .selectAll('whatever')
+            .data(data_ready)
+            .enter()
+            .append('path')
+            .attr('d', d3.arc()
+                .innerRadius(100)         // This is the size of the donut hole
+                .outerRadius(radius)
+            )
+            .attr('fill', function (d) { return (color(d.data.key)) })
+            .attr("stroke", "black")
+            .style("stroke-width", "2px")
+            .style("opacity", 0.7)
+
+    </script>
+
+
+
+    <script src="../movement.js"></script>
+</body>
+
+</html>
