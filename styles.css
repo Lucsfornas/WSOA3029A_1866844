@@ -129,3 +129,24 @@ p{
 font-weight: 600;
 
 }
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.green{
+color: rgb(0, 180, 0);
+}
+.blue{
+    color: rgb(0, 0, 197);
+}
+.red{
+    color: red;
+}
+.purple{
+    color: purple;
+}
+.orangatang{
+    color: orange;
+}
