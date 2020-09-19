@@ -44,9 +44,8 @@
 
     <section class="backgroundcol">
         <h1 class="orange">Covid-19 API Data</h1>
-    </section>
-    <br>
-    <section class="backgroundcol">
+        <br>
+
         <p>Active: <span id="act"></span></p>
         <br>
         <p>Confirmed: <span id="conf"></span></p>
@@ -56,10 +55,12 @@
         <p>Deaths: <span id="det"></span></p>
         <br>
         <p>Recovered: <span id="rec"></span></p>
+        <br>
+        <p>For this graph I used chart.js libraries</p>
+
+        <canvas id="chart" width="400" height="400"></canvas>
+
     </section>
-
-    <canvas id="chart" width="400" height="400"></canvas>
-
     <script>
         var valuesdata = [];
         getstats();
