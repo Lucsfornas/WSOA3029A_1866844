@@ -158,7 +158,6 @@ color: rgb(0, 180, 0);
     color: orange;
 }
 
-.d3graph{
-    justify-content: center;
-    align-items: center;
+.box{
+    border:3px solid #11353780;
 }
