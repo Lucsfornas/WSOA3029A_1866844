@@ -56,7 +56,8 @@
         <br>
         <p>Recovered: <span id="rec"></span></p>
         <br>
-        <p>For this graph I used chart.js libraries</p>
+        <p>For this graph I used chart.js libraries in order to create the visualisation the data being displayed is
+            from covid-19 API.</p>
 
         <canvas id="chart" width="400" height="400"></canvas>
 
@@ -117,7 +118,7 @@
             const myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Active', 'Confirmed', 'Deaths', 'Recovered', 'Critical'],
+                    labels: ['Active', 'Confirmed', 'Deaths', 'Critical', 'Recovered'],
                     datasets: [{
                         label: 'Bar Graph Showing Covid-19 World Statistics',
                         data: stats,

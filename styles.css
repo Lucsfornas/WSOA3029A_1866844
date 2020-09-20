@@ -157,3 +157,8 @@ color: rgb(0, 180, 0);
 .orangatang{
     color: orange;
 }
+
+.d3graph{
+    justify-content: center;
+    align-items: center;
+}
