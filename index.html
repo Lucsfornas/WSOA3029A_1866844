@@ -68,16 +68,18 @@
         let yScale = d3.scaleLinear().domain([0, 100]).range([500, 0]);
 
         visArea
-            .append("g")
+            .append('g')
             .attr("transform", 'translate(50, 10)')
             .call(d3.axisLeft(yScale));
 
         visArea
-            .append("g")
+            .append('g')
             .attr("transform", 'translate (50,500)')
             .call(d3.axisBottom(xScale));
 
         visArea
+            .append('g')
+            .attr("transform", 'translate(50, 10)')
             .selectAll('dots')
             .data(exampledata)
             .enter()
