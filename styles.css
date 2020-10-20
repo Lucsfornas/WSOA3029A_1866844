@@ -38,10 +38,10 @@ nav{
 .navlinks a{
     color: #e7e5df;
     text-decoration: none;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     font-weight: bold;
     font-size: 14px;
-
+    padding: 1rem;
 }
 
 .burger{
@@ -84,6 +84,7 @@ nav{
     .navlinks li{
         opacity: 1;
     }
+
     .burger{
         display: block;
     }
@@ -183,7 +184,35 @@ color: rgb(0, 180, 0);
         display: block;
       }
 
-.blog1{
-        margin: 5rem;
-        padding: 3rem
+.blog1 {    
+        padding: 2rem;
       }
+.blog2 {    
+        padding: 2rem;
+      }
+.blog3 {    
+        padding: 2rem;
+      }
+.blog4 {    
+        padding: 2rem;
+      }
+.blog5 {    
+        padding: 2rem;
+      }
+.blog6 {    
+        padding: 2rem;
+      }
+
+.blogbuttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    text-emphasis: none;
+    background: rgba(211, 211, 211, 0.349);
+    padding: 1rem;
+}
+
+.blogbuttons button{
+background-color: grey;
+}
