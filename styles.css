@@ -67,6 +67,7 @@ nav{
     body{
         overflow-x: hidden;
     }
+
     .navlinks{
         position: absolute;
         right: 0px;
@@ -119,8 +120,6 @@ opacity: 0;
 }
 .backgroundcol{
     background: linear-gradient(90deg,#96616b,#f76f8e,#ffead0,#f76f8e,#96616b);
-    width: 100%;
-    height: 140vh;
 }
 
 h1, h2, h3, h4 {
@@ -182,4 +181,9 @@ color: rgb(0, 180, 0);
         margin-right: auto;
         align-items: center;
         display: block;
+      }
+
+.blog1{
+        margin: 5rem;
+        padding: 3rem
       }

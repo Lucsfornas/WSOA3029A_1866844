@@ -42,28 +42,30 @@
         </div>
     </nav>
 
-    <section class="backgroundcol">
+
+    <main class="backgroundcol">
         <br>
         <h1 class="orange">Covid-19 API Data</h1>
         <br>
+        <article class="DISP_API">
+            <p>Active: <span id="act"></span></p>
+            <br>
+            <p>Confirmed: <span id="conf"></span></p>
+            <br>
+            <p>Critical: <span id="crit"></span></p>
+            <br>
+            <p>Deaths: <span id="det"></span></p>
+            <br>
+            <p>Recovered: <span id="rec"></span></p>
+            <br>
+            <p>For this graph I used chart.js libraries in order to create the visualisation the data being displayed is
+                from covid-19 API.</p>
 
-        <p>Active: <span id="act"></span></p>
-        <br>
-        <p>Confirmed: <span id="conf"></span></p>
-        <br>
-        <p>Critical: <span id="crit"></span></p>
-        <br>
-        <p>Deaths: <span id="det"></span></p>
-        <br>
-        <p>Recovered: <span id="rec"></span></p>
-        <br>
-        <p>For this graph I used chart.js libraries in order to create the visualisation the data being displayed is
-            from covid-19 API.</p>
+            <canvas id="chart" width="400" height="400"></canvas>
 
-        <canvas id="chart" width="400" height="400"></canvas>
+        </article>
+    </main>
 
-    </section>
-    <section class="backgroundcol"></section>
     <script>
         var valuesdata = [];
         getstats();

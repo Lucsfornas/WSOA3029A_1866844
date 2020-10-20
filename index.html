@@ -41,59 +41,62 @@
         </div>
     </nav>
 
-    <section class="backgroundcol">
+    <main class="backgroundcol">
         <br>
         <h1 class="orange">Welcome To The Guide!</h1>
         <p>A Website by Luca Fornasari</p>
-        <br>
-        <p>This is my project website to explore data visualisations and to make new creative data visualisations.</p>
-        <br>
-        <p>This is an example graph made with d3.js libraries.</p>
-        <br>
-        <div class="graph1"><svg id="visualisation" width="600" height="600"></svg></div>
-    </section>
+        <article>
+            <br>
+            <p>This is my project website to explore data visualisations and to make new creative data visualisations.
+            </p>
+            <br>
+            <p>This is an example graph made with d3.js libraries.</p>
+            <br>
+            <div class="graph1"><svg id="visualisation" width="600" height="600"></svg></div>
+        </article>
 
-    <script>
-        let exampledata = [
-            { x: 10, y: 20 },
-            { x: 40, y: 90 },
-            { x: 80, y: 50 },
-        ]
+        <script>
+            let exampledata = [
+                { x: 10, y: 20 },
+                { x: 40, y: 90 },
+                { x: 80, y: 50 },
+            ]
 
-        let margin = 50;
-        let topMargin = 10;
-        let graphheight = 500;
-        let visArea = d3.select("#visualisation");
-        let xScale = d3.scaleLinear().domain([0, 100]).range([0, 500]);
-        let yScale = d3.scaleLinear().domain([0, 100]).range([500, 0]);
+            let margin = 50;
+            let topMargin = 10;
+            let graphheight = 500;
+            let visArea = d3.select("#visualisation");
+            let xScale = d3.scaleLinear().domain([0, 100]).range([0, 500]);
+            let yScale = d3.scaleLinear().domain([0, 100]).range([500, 0]);
 
-        visArea
-            .append('g')
-            .attr("transform", 'translate(50, 10)')
-            .call(d3.axisLeft(yScale));
+            visArea
+                .append('g')
+                .attr("transform", 'translate(50, 10)')
+                .call(d3.axisLeft(yScale));
 
-        visArea
-            .append('g')
-            .attr("transform", 'translate (50,500)')
-            .call(d3.axisBottom(xScale));
+            visArea
+                .append('g')
+                .attr("transform", 'translate (50,500)')
+                .call(d3.axisBottom(xScale));
 
-        visArea
-            .append('g')
-            .attr("transform", 'translate(50, 10)')
-            .selectAll('dots')
-            .data(exampledata)
-            .enter()
-            .append("circle")
-            .attr("cx", function (d) {
-                return xScale(d.x);
-            })
-            .attr("cy", function (d) {
-                return yScale(d.y);
-            })
-            .attr("r", 7);
+            visArea
+                .append('g')
+                .attr("transform", 'translate(50, 10)')
+                .selectAll('dots')
+                .data(exampledata)
+                .enter()
+                .append("circle")
+                .attr("cx", function (d) {
+                    return xScale(d.x);
+                })
+                .attr("cy", function (d) {
+                    return yScale(d.y);
+                })
+                .attr("r", 7);
 
 
-    </script>
+        </script>
+    </main>
 
     <script src="movement.js"></script>
 </body>
