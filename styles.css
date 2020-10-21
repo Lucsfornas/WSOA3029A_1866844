@@ -259,19 +259,21 @@ background-repeat: no-repeat;
     flex-direction: column;
     height: 100%;
     text-align: center;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding: 2rem 5rem;
 }
 
 .logowrap img{
     width: 50%;
-    margin-bottom: 20px;
+    margin: auto;
+    display: inline-block;
+
 }
 
 .imgtxtwrapper .subtitle{
 transition: 1s;
 font-weight: 600;
 color: transparent;
+overflow: hidden;
 }
 
 .imgtxtwrapper:hover .subtitle{
