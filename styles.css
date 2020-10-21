@@ -259,14 +259,14 @@ background-repeat: no-repeat;
     flex-direction: column;
     height: 100%;
     text-align: center;
-    padding: 2rem 5rem;
+    margin: 0.5rem;
 }
 
 .logowrap img{
     width: 50%;
     margin: auto;
     display: inline-block;
-
+position: relative;
 }
 
 .imgtxtwrapper .subtitle{
