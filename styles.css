@@ -219,6 +219,34 @@ color: rgb(0, 180, 0);
 background-color: grey;
 }
 
-.contwrap{
+/*homepage design*/
 
+.items-wrap{
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+}
+
+.itemwrap{
+    position: relative;
+}
+
+.LP-BackGround{
+height: 350px;
+width:100%;
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.imgtxtwrapper{
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
 }
