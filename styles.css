@@ -226,6 +226,9 @@ flex-direction: column;
 .blog6 {    
         padding: 2rem;
       }
+.aboutpg{
+    padding: 2rem;
+}      
 
 .blogbuttons{
     display: flex;
