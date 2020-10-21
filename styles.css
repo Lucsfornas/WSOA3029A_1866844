@@ -250,3 +250,24 @@ background-repeat: no-repeat;
     padding-left: 100px;
     padding-right: 100px;
 }
+
+.logowrap img{
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.imgtxtwrapper .subtitle{
+transition: 1s;
+font-weight: 600;
+color: transparent;
+}
+
+.imgtxtwrapper:hover .subtitle{
+    font-weight: 600;
+    color: palevioletred;
+}
+
+.darken{
+    transition: 1s;
+    filter: brightness(10%);
+}
