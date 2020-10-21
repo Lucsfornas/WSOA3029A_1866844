@@ -83,7 +83,6 @@ nav{
         background-color: #393e41;
         display:flex;
         flex-direction: column;
-        align-items: center;
         width: 50%;
         transform: translate(100%);
         transition: transform 0.5s ease-in;
