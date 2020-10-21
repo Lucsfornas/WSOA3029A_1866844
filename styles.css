@@ -179,7 +179,8 @@ color: rgb(0, 180, 0);
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        height: 1rem;
+        
+        padding: 1rem 1rem;
       }
 
 .graph1{
