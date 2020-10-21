@@ -42,13 +42,14 @@
     </nav>
 
     <main class="backgroundcol">
+
         <br>
         <h1 class="orange">This is my Data Visualisation Page</h1>
 
         <br>
 
         <article>
-            <h2>This is an example graph made with d3.js libraries.</h2>
+            <h2 class="orange">This is an example graph made with d3.js libraries.</h2>
             <br>
             <div class="graph1"><svg id="visualisation" width="600" height="600"></svg></div>
         </article>
@@ -71,7 +72,31 @@
             <br>
             <p></p>
             <div class="container"><svg id="visualisation2" width="700" height="500"> </svg></div>
+            <br>
         </article>
+
+
+        <article class="DISP_API">
+            <h2 class="orange">Covid-19 API Data</h2>
+            <br>
+            <p>Active: <span id="act"></span></p>
+            <br>
+            <p>Confirmed: <span id="conf"></span></p>
+            <br>
+            <p>Critical: <span id="crit"></span></p>
+            <br>
+            <p>Deaths: <span id="det"></span></p>
+            <br>
+            <p>Recovered: <span id="rec"></span></p>
+            <br>
+            <p>For this graph I used chart.js libraries in order to create the visualisation the data being displayed is
+                from covid-19 API.</p>
+
+            <canvas id="chart" width="400" height="400"></canvas>
+
+        </article>
+
+
     </main>
 
 
@@ -208,6 +233,100 @@
         }
 
 
+    </script>
+
+
+
+    <script>
+        var valuesdata = [];
+        getstats();
+
+        function getstats() {
+            fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD&format=json&date=2020-07-21", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
+                    "x-rapidapi-key": "a78061f88cmsh3a84dcb9ef4c1c2p1d23f7jsna50cfba9f86c"
+                }
+            })
+                .then(response => {
+                    return response.json();
+                })
+
+                .then(function (data) {
+                    console.log(data);
+                    handledata(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+            const handledata = (data) => {
+                document.getElementById('act').innerText = data[0].active;
+                document.getElementById('conf').innerText = data[0].confirmed;
+                document.getElementById('crit').innerText = data[0].critical;
+                document.getElementById('det').innerText = data[0].deaths;
+                document.getElementById('rec').innerText = data[0].recovered;
+                var activeppl = 0;
+                var confirmedppl = 0;
+                var criticalppl = 0;
+                var deadppl = 0;
+                var recoveredppl = 0;
+                activeppl = data[0].active;
+                confirmedppl = data[0].confirmed;
+                criticalppl = data[0].critical;
+                deadppl = data[0].deaths;
+                recoveredppl = data[0].recovered;
+                valuesdata = [activeppl, confirmedppl, criticalppl, deadppl, recoveredppl]
+                drawtable();
+                console.log(valuesdata);
+
+
+            }
+        }
+
+        drawtable();
+
+        function drawtable() {
+            var stats = valuesdata;
+            const ctx = document.getElementById('chart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Active', 'Confirmed', 'Deaths', 'Critical', 'Recovered'],
+                    datasets: [{
+                        label: 'Bar Graph Showing Covid-19 World Statistics',
+                        data: stats,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
     </script>
 
 
