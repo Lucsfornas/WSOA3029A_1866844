@@ -3,7 +3,7 @@
     padding: 0px;
     box-sizing: border-box;
 }
-
+/*nav bar styling*/
 nav{
     display: flex;
     justify-content: space-around;
@@ -117,6 +117,8 @@ opacity: 0;
     transform: rotate(45deg) translate(-5px,-6px);
 }
 
+/*main site styling*/
+
 .orange{
     color: rgb(49, 71, 82);
 
@@ -164,11 +166,13 @@ color: rgb(0, 180, 0);
     border:3px solid #11353780;
 }
 
-.Wframe img {
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
+.Wframe{
+        display: flex;
+        flex-direction: column;
         transform: rotate(90deg);
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
       }
 
 .graph1{
@@ -179,12 +183,16 @@ color: rgb(0, 180, 0);
     margin: 0.5rem 1rem;
       }
 
- .img1 img{
-        margin-left: auto;
-        margin-right: auto;
+ .imgedmondhalley {
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        display: block;
+        justify-content: space-between;
+        width: 100%;
       }
+.imgedmondhalley img{
+    justify-content: space-between;
+}      
 
 .blog1 {    
         padding: 2rem;
@@ -219,7 +227,7 @@ color: rgb(0, 180, 0);
 background-color: grey;
 }
 
-/*homepage design*/
+/*homepage design styling*/
 
 .items-wrap{
 display: grid;

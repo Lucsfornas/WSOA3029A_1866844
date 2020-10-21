@@ -25,13 +25,10 @@
                 <a href="./htmlPages/About.html">About</a>
             </li>
             <li>
-                <a href="./htmlPages/creativeApi.html">Creative Api Page</a>
-            </li>
-            <li>
                 <a href="./htmlPages/WSOAblogs.html">WSOA3029 Blogs</a>
             </li>
             <li>
-                <a href="./htmlPages/newdatavisualisation.html">Donut Visualisation</a>
+                <a href="./htmlPages/newdatavisualisation.html">Data Visualisations</a>
             </li>
         </ul>
         <div class="burger">
@@ -47,24 +44,13 @@
         <br>
         <p>A Website by Luca Fornasari</p>
         <br>
-        <p>You can use these links to quickly navigate to my WSOA3029 blog posts</p>
-        <div class="blogbuttons">
-            <button><a href="#Blog1" alt='Broken Link'>Blog 1</a></button>
-            <button><a href="#Blog2" alt='Broken Link'>Blog 2</a></button>
-            <button><a href="#Blog3" alt='Broken Link'>Blog 3</a></button>
-            <button><a href="#Blog4" alt='Broken Link'>Blog 4</a></button>
-            <button><a href="#Blog5" alt='Broken Link'>Blog 5</a></button>
-            <button><a href="#Blog6" alt='Broken Link'>Blog 6</a></button>
-        </div>
 
         <article>
             <br>
-            <p>This is my project website to explore data visualisations and to make new creative data visualisations.
+            <p>
+                This is my project website to explore data visualisations and to make new creative data visualisations.
             </p>
             <br>
-            <p>This is an example graph made with d3.js libraries.</p>
-            <br>
-            <div class="graph1"><svg id="visualisation" width="600" height="600"></svg></div>
         </article>
 
 
@@ -80,7 +66,8 @@
                         </div>
 
                         <div class="subtitle">
-                            blog posts for the win 1
+                            Blog 1: Representation - A close reading and reflection on a Selected passage from
+                            Kidd, J. (2015) Representation. Routledge.
                         </div>
 
                     </div>
@@ -95,7 +82,8 @@
                         </div>
 
                         <div class="subtitle">
-                            blog posts for the win 2
+                            Blog 2: Historic Data Visualisation - an analysis of Edmond Halleys historic data
+                            visualisation tied in closely with the kidd Representation reading.
                         </div>
 
                     </div>
@@ -110,7 +98,54 @@
                         </div>
 
                         <div class="subtitle">
-                            blog posts for the win 3
+                            Blog 3: Data-driven Storytelling - Close reading and reflection on one of the selected
+                            essays from Riche, N. H. et al. (eds) (2018) Data-driven storytelling. Boca Raton, Florida:
+                            CRC Press/Taylor & Francis Group (A K Peters Visualization Series).
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="itemwrap">
+                    <div class="LP-BackGround" style="background-image: url(backgroundimg4.jpg);"></div>
+
+                    <div class="imgtxtwrapper">
+                        <div class="logowrap">
+                            <img src="bookblogpostimg1.png">
+                        </div>
+
+                        <div class="subtitle">
+                            Blog 4::
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="itemwrap">
+                    <div class="LP-BackGround" style="background-image: url(backgroundimg5.jpg);"></div>
+
+                    <div class="imgtxtwrapper">
+                        <div class="logowrap">
+                            <img src="bookblogpostimg1.png">
+                        </div>
+
+                        <div class="subtitle">
+                            Blog 5:
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="itemwrap">
+                    <div class="LP-BackGround" style="background-image: url(backgroundimg6.jpg);"></div>
+
+                    <div class="imgtxtwrapper">
+                        <div class="logowrap">
+                            <img src="bookblogpostimg1.png">
+                        </div>
+
+                        <div class="subtitle">
+                            Blog 6:
                         </div>
 
                     </div>
@@ -125,7 +160,7 @@
                         </div>
 
                         <div class="subtitle">
-                            blog posts for the win 4
+                            Data Visualisation 1
                         </div>
 
                     </div>
@@ -140,7 +175,7 @@
                         </div>
 
                         <div class="subtitle">
-                            blog posts for the win 5
+                            Data Visualisation 2
                         </div>
 
                     </div>
@@ -155,7 +190,7 @@
                         </div>
 
                         <div class="subtitle">
-                            blog posts for the win 6
+                            Data Visualisation 3
                         </div>
 
                     </div>
@@ -164,49 +199,6 @@
 
             </div>
         </div>
-
-
-        <script>
-            let exampledata = [
-                { x: 10, y: 20 },
-                { x: 40, y: 90 },
-                { x: 80, y: 50 },
-            ]
-
-            let margin = 50;
-            let topMargin = 10;
-            let graphheight = 500;
-            let visArea = d3.select("#visualisation");
-            let xScale = d3.scaleLinear().domain([0, 100]).range([0, 500]);
-            let yScale = d3.scaleLinear().domain([0, 100]).range([500, 0]);
-
-            visArea
-                .append('g')
-                .attr("transform", 'translate(50, 10)')
-                .call(d3.axisLeft(yScale));
-
-            visArea
-                .append('g')
-                .attr("transform", 'translate (50,500)')
-                .call(d3.axisBottom(xScale));
-
-            visArea
-                .append('g')
-                .attr("transform", 'translate(50, 10)')
-                .selectAll('dots')
-                .data(exampledata)
-                .enter()
-                .append("circle")
-                .attr("cx", function (d) {
-                    return xScale(d.x);
-                })
-                .attr("cy", function (d) {
-                    return yScale(d.y);
-                })
-                .attr("r", 7);
-
-
-        </script>
     </main>
 
     <script src="homepagedarken.js"></script>
