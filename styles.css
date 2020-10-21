@@ -33,6 +33,7 @@ nav{
 
 .navlinks li{
     list-style: none;
+    margin: 1rem;
 }
 
 .navlinks a{
@@ -42,6 +43,7 @@ nav{
     font-weight: bold;
     font-size: 14px;
     padding: 1rem;
+    text-transform: uppercase;
 }
 
 .burger{
@@ -215,4 +217,8 @@ color: rgb(0, 180, 0);
 
 .blogbuttons button{
 background-color: grey;
+}
+
+.contwrap{
+
 }
