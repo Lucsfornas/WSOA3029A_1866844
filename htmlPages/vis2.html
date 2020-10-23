@@ -54,11 +54,14 @@
         <article>
             <h2 class="orange">This is my second Data Visualisation made using D3.js libraries</h2>
             <br>
-            <div id="app">
-                <div class="chart">
+            <p>This data visualisation was made as an interactable graph, by checking and unchecking the boxes displayed
+                on the left the bars will either appear or dissapear.</p>
+            <br>
+            <div id="appvis2">
+                <div class="chartvis2">
                     <svg class="graph2" id="visualisation2"></svg>
                 </div>
-                <div id="data">
+                <div id="datavis2">
                     <ul></ul>
                 </div>
             </div>
@@ -84,7 +87,7 @@
         const y = d3.scaleLinear().range([chart_height, 0]);
 
         const chartcontainer = d3
-            .select("#visualisation2")
+            .select('#visualisation2')
             .attr('width', chart_width)
             .attr('height', chart_height + margins.top + margins.bottom);
 
@@ -108,9 +111,9 @@
                 .append('rect')
                 .classed('bar', true)
                 .attr('width', x.bandwidth())
-                .attr('height', data => chart_height - y(data.value))
-                .attr('x', data => x(data.type))
-                .attr('y', data => (data.value));
+                .attr('height', (data) => chart_height - y(data.value))
+                .attr('x', (data) => x(data.type))
+                .attr('y', (data) => (data.value));
 
 
             chart.selectAll('.bar').data(selecteddata, data => data.id).exit().remove();
@@ -133,7 +136,7 @@
         let unselectedid = [];
 
         const listitems = d3
-            .select('#data')
+            .select('#datavis2')
             .select('ul')
             .selectAll('li')
             .data(covid19data)
