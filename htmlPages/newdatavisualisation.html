@@ -25,13 +25,10 @@
                 <a href="./About.html">About</a>
             </li>
             <li>
-                <a href="./creativeApi.html">Creative Api Page</a>
-            </li>
-            <li>
                 <a href="./WSOAblogs.html">WSOA3029 Blogs</a>
             </li>
             <li>
-                <a href="newdatavisualisation.html">Donut Visualisation</a>
+                <a href="./newdatavisualisation.html">Data Visualisations</a>
             </li>
         </ul>
         <div class="burger">
@@ -48,10 +45,34 @@
 
         <br>
 
+        <div class="blogbuttons">
+            <button><a href="./vis1.html" alt='Broken Link'>data vis 1</a></button>
+            <button><a href="./vis2.html" alt='Broken Link'>data vis 2</a></button>
+            <button><a href="./vis3.html" alt='Broken Link'>data vis 3</a></button>
+            <button><a href="./creativeApi.html" alt='Broken Link'>data vis 4 (extra)</a></button>
+        </div>
+
+
+
         <article>
-            <h2 class="orange">This is an example graph made with d3.js libraries.</h2>
+            <h2 class="orange">This my first example graph made with d3.js libraries.</h2>
             <br>
             <div class="graph1"><svg class="imggraph1" id="visualisation" width="600" height="600"></svg></div>
+        </article>
+
+        <br>
+
+        <article>
+            <h2 class="orange">This is my second Data Visualisation made using D3.js libraries</h2>
+            <br>
+            <div id="app">
+                <div class="chart">
+                    <svg class="graph2" id="visualisation2"></svg>
+                </div>
+                <div id="data">
+                    <ul></ul>
+                </div>
+            </div>
         </article>
 
         <br>
@@ -71,7 +92,7 @@
             <p>For this graph i used the D3.js library with data from a covid-19 API.</p>
             <br>
             <p></p>
-            <div class="container"><svg id="visualisation2" width="700" height="500"> </svg></div>
+            <div class="container"><svg id="visualisation3" width="700" height="500"> </svg></div>
             <br>
         </article>
 
@@ -144,6 +165,99 @@
 
 
     <script>
+        let covid19data = [
+            { id: 'd1', type: 'totalconfirmed', value: 10 }, /*15085083 */
+            { id: 'd2', type: 'totalactive', value: 12 }, /*5361549 */
+            { id: 'd3', type: 'totalcritical', value: 11 }, /* 63786*/
+            { id: 'd4', type: 'totaldeaths', value: 6 }, /*618504 */
+            { id: 'd5', type: 'totalrecovered', value: 5 }, /*9105030 */
+        ]
+        const margins = { top: 20, bottom: 10 };
+        const chart_width = 600;
+        const chart_height = 400 - margins.top - margins.bottom;
+
+        const selecteddata = covid19data;
+
+        const x = d3.scaleBand().rangeRound([0, chart_width]).padding(0.1);
+        const y = d3.scaleLinear().range([chart_height, 0]);
+
+        const chartcontainer = d3
+            .select("#visualisation2")
+            .attr('width', chart_width)
+            .attr('height', chart_height + margins.top + margins.bottom);
+
+        x.domain(covid19data.map((d) => d.type));
+        y.domain([0, d3.max(covid19data, d => d.value) + 3]);
+
+        const chart = chartcontainer.append('g');
+
+        chart
+            .append('g')
+            .call(d3.axisBottom(x))
+            .attr('transform', `translate(0, ${chart_height})`)
+            .attr('color', '#4f009e');
+
+        function renderchart() {
+
+            chart
+                .selectAll('.bar')
+                .data(selecteddata, data => data.id)
+                .enter()
+                .append('rect')
+                .classed('bar', true)
+                .attr('width', x.bandwidth())
+                .attr('height', data => chart_height - y(data.value))
+                .attr('x', data => x(data.type))
+                .attr('y', data => (data.value));
+
+
+            chart.selectAll('.bar').data(selecteddata, data => data.id).exit().remove();
+
+            chart.selectAll('.label')
+                .data(selecteddata, data => data.id)
+                .enter()
+                .append('text')
+                .text((data) => data.value)
+                .attr('x', data => x(data.type) + x.bandwidth() / 2)
+                .attr('y', data => (data.value) - 20)
+                .attr('text-anchor', 'middle')
+                .classed('label', true);
+
+            chart.selectAll('.label').data(selecteddata, data => data.id).exit().remove();
+        }
+
+        renderchart();
+
+        let unselectedid = [];
+
+        const listitems = d3
+            .select('#data')
+            .select('ul')
+            .selectAll('li')
+            .data(covid19data)
+            .enter()
+            .append('li');
+
+        listitems.append('span').text(data => data.type);
+
+        listitems
+            .append('input')
+            .attr('type', 'checkbox')
+            .attr('checked', true)
+            .on('change', (data) => {
+                if (unselectedid.indexOf(data.id) === -1) {
+                    unselectedid.push(data.id);
+                } else {
+                    unselectedid = unselectedid.filter(id => id !== data.id);
+                }
+                selecteddata = covid19data.filter(
+                    (d) => unselectedid.indexOf(d.id) == -1);
+                renderchart();
+            });
+    </script>
+
+
+    <script>
         var valuesdata = [];
         getstats();
 
@@ -200,7 +314,7 @@
             var piestats = valuesdata;
             var data = piestats;
 
-            var svg = d3.select("#visualisation2"),
+            var svg = d3.select("#visualisation3"),
                 width = svg.attr("width"),
                 height = svg.attr("height"),
                 radius = Math.min(width, height) / 2,
@@ -235,99 +349,6 @@
 
     </script>
 
-
-
-    <script>
-        var valuesdata = [];
-        getstats();
-
-        function getstats() {
-            fetch("https://covid-19-data.p.rapidapi.com/report/totals?date-format=YYYY-MM-DD&format=json&date=2020-07-21", {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
-                    "x-rapidapi-key": "a78061f88cmsh3a84dcb9ef4c1c2p1d23f7jsna50cfba9f86c"
-                }
-            })
-                .then(response => {
-                    return response.json();
-                })
-
-                .then(function (data) {
-                    console.log(data);
-                    handledata(data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-
-            const handledata = (data) => {
-                document.getElementById('act').innerText = data[0].active;
-                document.getElementById('conf').innerText = data[0].confirmed;
-                document.getElementById('crit').innerText = data[0].critical;
-                document.getElementById('det').innerText = data[0].deaths;
-                document.getElementById('rec').innerText = data[0].recovered;
-                var activeppl = 0;
-                var confirmedppl = 0;
-                var criticalppl = 0;
-                var deadppl = 0;
-                var recoveredppl = 0;
-                activeppl = data[0].active;
-                confirmedppl = data[0].confirmed;
-                criticalppl = data[0].critical;
-                deadppl = data[0].deaths;
-                recoveredppl = data[0].recovered;
-                valuesdata = [activeppl, confirmedppl, criticalppl, deadppl, recoveredppl]
-                drawtable();
-                console.log(valuesdata);
-
-
-            }
-        }
-
-        drawtable();
-
-        function drawtable() {
-            var stats = valuesdata;
-            const ctx = document.getElementById('chart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Active', 'Confirmed', 'Deaths', 'Critical', 'Recovered'],
-                    datasets: [{
-                        label: 'Bar Graph Showing Covid-19 World Statistics',
-                        data: stats,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-        }
-    </script>
 
 
     <script src="../movement.js"></script>

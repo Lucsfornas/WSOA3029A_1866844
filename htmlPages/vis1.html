@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Api Page</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,700;1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <h4>The Guide</h4>
+        </div>
+        <ul class="navlinks">
+            <li>
+                <a href="../index.html">Home</a>
+            </li>
+            <li>
+                <a href="./About.html">About</a>
+            </li>
+            <li>
+                <a href="./WSOAblogs.html">WSOA3029 Blogs</a>
+            </li>
+            <li>
+                <a href="./newdatavisualisation.html">Data Visualisations</a>
+            </li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+
+    <main class="backgroundcol">
+
+        <br>
+        <h1 class="orange">This is my first Data Visualisation</h1>
+
+        <br>
+
+        <article>
+            <h2 class="orange">This my first example graph made with d3.js libraries.</h2>
+            <br>
+            <div class="graph1"><svg class="imggraph1" id="visualisation" width="600" height="600"></svg></div>
+        </article>
+
+    </main>
+
+
+    <script>
+        let exampledata = [
+            { x: 10, y: 20 },
+            { x: 40, y: 90 },
+            { x: 80, y: 50 },
+        ]
+
+        let margin = 50;
+        let topMargin = 10;
+        let graphheight = 500;
+        let visArea = d3.select("#visualisation");
+        let xScale = d3.scaleLinear().domain([0, 100]).range([0, 500]);
+        let yScale = d3.scaleLinear().domain([0, 100]).range([500, 0]);
+
+        visArea
+            .append('g')
+            .attr("transform", 'translate(50, 10)')
+            .call(d3.axisLeft(yScale));
+
+        visArea
+            .append('g')
+            .attr("transform", 'translate (50,500)')
+            .call(d3.axisBottom(xScale));
+
+        visArea
+            .append('g')
+            .attr("transform", 'translate(50, 10)')
+            .selectAll('dots')
+            .data(exampledata)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) {
+                return xScale(d.x);
+            })
+            .attr("cy", function (d) {
+                return yScale(d.y);
+            })
+            .attr("r", 7);
+
+
+    </script>
+
+    <script src="../movement.js"></script>
+</body>
+
+</html>

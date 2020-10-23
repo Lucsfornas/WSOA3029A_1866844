@@ -9,7 +9,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,700;1,500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 
 </head>
 
@@ -42,26 +42,28 @@
 
     <main class="backgroundcol">
         <br>
-        <h1 class="orange">Covid-19 API Data</h1>
+        <h1 class="orange">This is my third data visualisation</h1>
         <br>
-        <article class="DISP_API">
-            <p>Active: <span id="act"></span></p>
+        <article class="DISP_DONUT">
+            <h2 class="orange">Covid-19 API Data Shown as a Donut Chart with the total confirmed people being <span
+                    id="conf"></span></h2>
             <br>
-            <p>Confirmed: <span id="conf"></span></p>
+            <p class="green">Active (Green): <span id="act"></span></p>
             <br>
-            <p>Critical: <span id="crit"></span></p>
+            <p class="blue">Critical (blue): <span id="crit"></span></p>
             <br>
-            <p>Deaths: <span id="det"></span></p>
+            <p class="orangatang">Deaths (Orange): <span id="det"></span></p>
             <br>
-            <p>Recovered: <span id="rec"></span></p>
+            <p class="purple">Recovered (Purple): <span id="rec"></span></p>
             <br>
-            <p>For this graph I used chart.js libraries in order to create the visualisation the data being displayed is
-                from covid-19 API.</p>
-
-            <canvas id="chart" width="400" height="400"></canvas>
-
+            <p>For this graph i used the D3.js library with data from a covid-19 API.</p>
+            <br>
+            <p></p>
+            <div class="container"><svg id="visualisation3" width="700" height="500"> </svg></div>
+            <br>
         </article>
     </main>
+
 
     <script>
         var valuesdata = [];
@@ -103,58 +105,57 @@
                 criticalppl = data[0].critical;
                 deadppl = data[0].deaths;
                 recoveredppl = data[0].recovered;
-                valuesdata = [activeppl, confirmedppl, criticalppl, deadppl, recoveredppl]
-                drawtable();
+                valuesdata = [activeppl, criticalppl, deadppl, recoveredppl]
+                piedata();
                 console.log(valuesdata);
 
 
             }
         }
 
-        drawtable();
 
-        function drawtable() {
-            var stats = valuesdata;
-            const ctx = document.getElementById('chart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Active', 'Confirmed', 'Deaths', 'Critical', 'Recovered'],
-                    datasets: [{
-                        label: 'Bar Graph Showing Covid-19 World Statistics',
-                        data: stats,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
+
+        piedata();
+
+        function piedata() {
+
+            var piestats = valuesdata;
+            var data = piestats;
+
+            var svg = d3.select("#visualisation3"),
+                width = svg.attr("width"),
+                height = svg.attr("height"),
+                radius = Math.min(width, height) / 2,
+                g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+            var color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00', '#984ea3', '#e41a1c']);
+
+            // Generate the pie
+            var pie = d3.pie();
+
+            // Generate the arcs
+            var arc = d3.arc()
+                .innerRadius(100)
+                .outerRadius(radius);
+
+            //Generate groups
+            var arcs = g.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc")
+
+            //Draw arc paths
+            arcs.append("path")
+                .attr("fill", function (d, i) {
+                    return color(i);
+                })
+                .attr("d", arc);
+
         }
-    </script>
 
+
+    </script>
 
 
     <script src="../movement.js"></script>
