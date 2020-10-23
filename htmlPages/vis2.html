@@ -85,7 +85,7 @@
         const chart_width = 600;
         const chart_height = 400 - margins.top - margins.bottom;
 
-        const selecteddata = covid19data;
+        let selecteddata = covid19data;
 
         const x = d3.scaleBand().rangeRound([0, chart_width]).padding(0.1);
         const y = d3.scaleLinear().range([chart_height, 0]);
@@ -159,8 +159,7 @@
                 } else {
                     unselectedid = unselectedid.filter(id => id !== data.id);
                 }
-                selecteddata = covid19data.filter(
-                    (d) => unselectedid.indexOf(d.id) == -1);
+                selecteddata = covid19data.filter((d) => unselectedid.indexOf(d.id) == -1);
                 renderchart();
             });
     </script>
