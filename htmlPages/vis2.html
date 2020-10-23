@@ -10,6 +10,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-axis.v2.min.js"></script>
+
 
 </head>
 
@@ -143,7 +145,7 @@
             .enter()
             .append('li');
 
-        listitems.append('span').text(data => data.type);
+        listitems.append('span').text((data) => data.type);
 
         listitems
             .append('input')
