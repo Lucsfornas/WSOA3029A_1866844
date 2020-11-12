@@ -87,6 +87,7 @@ nav{
         transform: translate(100%);
         transition: transform 0.5s ease-in;
         z-index: 1000;
+        overflow-x: hidden;
     }
     .navlinks li{
         opacity: 1;
@@ -125,7 +126,7 @@ opacity: 0;
 /*main site styling*/
 
 .orange{
-    color: rgb(49, 71, 82);
+    color: rgb(0, 0, 0);
 
 }
 .backgroundcol{
@@ -142,8 +143,8 @@ p{
     font-family: 'Raleway', sans-serif;
     text-align: center;
 font-weight: 600;
-color: #37505c;
-
+color: #000000;
+word-spacing: .1rem;
 }
 
 .container{
@@ -172,14 +173,20 @@ color: rgb(0, 180, 0);
 }
 
 .Wframe{
-        display: flex;
-        flex-direction: column;
-        transform: rotate(90deg);
+        display: inline-flex;
+        flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-evenly;
         width: 100%;
         height: auto;
+        padding: 1em;
+    margin: 0.5em;
       }
+
+.wframe section img{
+    padding: 1em;
+    margin: 0.25em;
+}
 
 .graph1{
     margin-left: auto;
@@ -227,6 +234,7 @@ flex-direction: column;
       }
 .aboutpg{
     padding: 2rem;
+    margin: 0.5em;
 }      
 
 .blogbuttons{
@@ -234,13 +242,49 @@ flex-direction: column;
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    text-emphasis: none;
     background: rgba(211, 211, 211, 0.349);
     padding: 1rem;
+    margin: 1em;
+    text-decoration: none;
+    height: auto;
 }
 
 .blogbuttons button{
 background-color: grey;
+width: 6em;
+height: auto;
+}
+
+.blogbuttons button a{
+    color: #e7e5df;
+    text-decoration: none;
+    height: auto;
+    width: 5em;
+}
+
+.visbuttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    background: rgba(211, 211, 211, 0.349);
+    padding: 1rem;
+    margin: 1em;
+    text-decoration: none;
+    height: auto;
+}
+
+.visbuttons button{
+    background-color: grey;
+width: 15em;
+height: auto;
+}
+
+.visbuttons button a{
+    color: #e7e5df;
+    text-decoration: none;
+    height: auto;
+    width: 5em;
 }
 
 /*homepage design styling*/
@@ -279,16 +323,17 @@ background-repeat: no-repeat;
 position: relative;
 }
 
-.imgtxtwrapper .subtitle{
+.imgtxtwrapper .subtitle a{
 transition: 1s;
 font-weight: 600;
 color: transparent;
 overflow: hidden;
 }
 
-.imgtxtwrapper:hover .subtitle{
+.imgtxtwrapper:hover .subtitle a{
     font-weight: 600;
     color: palevioletred;
+    text-decoration: none;
 }
 
 .darken{
