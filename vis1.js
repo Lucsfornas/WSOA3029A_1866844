@@ -1,15 +1,18 @@
 let exampledata = [
-    { x: 10, y: 20 },
-    { x: 40, y: 90 },
-    { x: 80, y: 50 },
+    { x: 16, y: 15085083 },
+    { x: 36, y: 5361549 },
+    { x: 42, y: 63786 },
+    { x: 48, y: 618504 },
+    { x: 64, y: 9105030 },
 ]
 
 let margin = 50;
 let topMargin = 10;
 let graphheight = 500;
 let visArea = d3.select("#visualisation");
-let xScale = d3.scaleLinear().domain([0, 100]).range([0, 500]);
-let yScale = d3.scaleLinear().domain([0, 100]).range([500, 0]);
+let xScale = d3.scaleLinear().domain([0, 100]).range([0, graphheight]);
+let yScale = d3.scaleLinear().domain([0, 16000000]).range([graphheight, 0]);
+let rad = 7;
 
 visArea
     .append('g')
@@ -34,5 +37,21 @@ visArea
     .attr("cy", function (d) {
         return yScale(d.y);
     })
-    .attr("r", 7);
+    .attr("r", rad)
+    .on("mouseover", Mouseoverin)
+    .on("mouseout", Mouseoverout);
 
+function Mouseoverin() {
+
+    d3.select(this)
+        .attr("fill", "green")
+        .attr("r", rad * 2);
+
+};
+
+function Mouseoverout() {
+
+    d3.select(this)
+        .attr("fill", "black")
+        .attr("r", rad);
+};

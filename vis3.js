@@ -27,11 +27,11 @@ function getstats() {
         document.getElementById('crit').innerText = data[0].critical;
         document.getElementById('det').innerText = data[0].deaths;
         document.getElementById('rec').innerText = data[0].recovered;
-        var activeppl = 0;
-        var confirmedppl = 0;
-        var criticalppl = 0;
-        var deadppl = 0;
-        var recoveredppl = 0;
+        let activeppl = 0;
+        let confirmedppl = 0;
+        let criticalppl = 0;
+        let deadppl = 0;
+        let recoveredppl = 0;
         activeppl = data[0].active;
         confirmedppl = data[0].confirmed;
         criticalppl = data[0].critical;
@@ -79,5 +79,6 @@ function piedata() {
             return color(i);
         })
         .attr("d", arc);
+
 
 }

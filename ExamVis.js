@@ -45,5 +45,5 @@ visarea
     })
     .attr("r", 7);
 
-d3.select("dots").style("color", 'green');
+d3.selectAll("circle").attr("fill", "red");
 
