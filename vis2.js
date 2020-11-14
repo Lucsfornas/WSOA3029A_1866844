@@ -27,7 +27,13 @@ const chart = chartcontainer.append('g');
 chart
     .append('g')
     .call(d3.axisBottom(x))
-    .attr('transform', `translate(0, ${chart_height})`)
+    .attr("transform", `translate(20, ${chart_height})`)
+    .attr('color', '#4f009e');
+
+chart
+    .append('g')
+    .call(d3.axisLeft(y))
+    .attr("transform", `translate(20, 0)`)
     .attr('color', '#4f009e');
 
 function renderchart() {
@@ -46,7 +52,8 @@ function renderchart() {
 
     chart.selectAll('.bar').data(selecteddata, data => data.id).exit().remove();
 
-    chart.selectAll('.label')
+    chart
+        .selectAll('.label')
         .data(selecteddata, data => data.id)
         .enter()
         .append('text')

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data visualisation 3</title>
+    <title>Data visualisation 1</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,700;1,500&display=swap"
         rel="stylesheet">
@@ -43,8 +43,10 @@
 
 
     <main class="backgroundcol">
+
         <br>
-        <h1 class="orange">This is my third data visualisation</h1>
+        <h1 class="orange">This is my Exam Data Visualisation</h1>
+
         <br>
         <p>you can use these links to navigate to my different Visualisations</p>
         <div class="blogbuttons">
@@ -54,29 +56,18 @@
             <button><a href="./ExamVis.html" alt='Broken Link'>Exam Visualisation</a></button>
             <button><a href="./creativeApi.html" alt='Broken Link'>data vis 4 (extra)</a></button>
         </div>
-        <br>
-        <article class="DISP_DONUT">
-            <h2 class="orange">Covid-19 API Data Shown as a Donut Chart with the total confirmed people being <span
-                    id="conf"></span></h2>
+
+        <article>
+            <h2>This my Exam Data visualisation made with d3.js libraries displaying covid-19 Statistics.
+            </h2>
             <br>
-            <p class="green">Active (Green): <span id="act"></span></p>
-            <br>
-            <p class="blue">Critical (blue): <span id="crit"></span></p>
-            <br>
-            <p class="orangatang">Deaths (Orange): <span id="det"></span></p>
-            <br>
-            <p class="purple">Recovered (Purple): <span id="rec"></span></p>
-            <br>
-            <p>For this graph i used the D3.js library with data from a covid-19 API.</p>
-            <br>
-            <p></p>
-            <div class="container"><svg id="visualisation3" width="700" height="500"> </svg></div>
-            <br>
+            <svg id="ExamVis" width="600" height="600"></svg>
         </article>
+
     </main>
 
 
-    <script src="../vis3.js"></script>
+    <script src="../ExamVis.js"></script>
     <script src="../movement.js"></script>
 </body>
 

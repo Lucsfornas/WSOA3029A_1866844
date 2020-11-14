@@ -51,24 +51,24 @@ piedata();
 
 function piedata() {
 
-    var piestats = valuesdata;
-    var data = piestats;
+    let piestats = valuesdata;
+    let data = piestats;
 
-    var svg = d3.select("#visualisation3"),
+    const svg = d3.select("#visualisation3"),
         width = svg.attr("width"),
         height = svg.attr("height"),
         radius = Math.min(width, height) / 2,
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-    var color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00', '#984ea3', '#e41a1c']);
+    const color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00', '#984ea3', '#e41a1c']);
 
-    var pie = d3.pie();
+    let pie = d3.pie();
 
-    var arc = d3.arc()
+    const arc = d3.arc()
         .innerRadius(100)
         .outerRadius(radius);
 
-    var arcs = g.selectAll("arc")
+    const arcs = g.selectAll("arc")
         .data(pie(data))
         .enter()
         .append("g")
