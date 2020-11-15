@@ -51,30 +51,44 @@ piedata();
 
 function piedata() {
 
-    let piestats = valuesdata;
-    let data = piestats;
+    // data tings from API
+    let data = valuesdata;
 
-    const svg = d3.select("#visualisation3"),
-        width = svg.attr("width"),
-        height = svg.attr("height"),
-        radius = Math.min(width, height) / 2,
-        g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    // variables 
+    const width = 700;
+    const height = 500;
 
+    // select graph 
+    const visArea3 = d3.select("#visualisation3")
+        .attr("viewBox", [0, 0, width, height]);
+
+    // graph rad 
+    const rad = Math.min(width, height) / 2;
+
+    // append g elements 
+    const G = visArea3
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    // different colours array
     const color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00', '#984ea3', '#e41a1c']);
 
+    // build graph 
     let pie = d3.pie();
 
     const arc = d3.arc()
-        .innerRadius(100)
-        .outerRadius(radius);
+        .innerRadius(rad / 2.5)
+        .outerRadius(rad);
 
-    const arcs = g.selectAll("arc")
+    const arcs = G
+        .selectAll("arc")
         .data(pie(data))
         .enter()
         .append("g")
         .attr("class", "arc")
 
-    arcs.append("path")
+    arcs
+        .append("path")
         .attr("fill", function (d, i) {
             return color(i);
         })

@@ -50,17 +50,17 @@ let yScale = d3.scaleLinear()
 yAxis = g => g
     .attr("transform", `translate(${margin.left},0)`)
     .call(d3.axisLeft(yScale).ticks(null, "M"))
-    .call(g => g.select(".domain").remove())
+//.call(g => g.select(".domain").remove());
 
 xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(xScale).tickSizeOuter(0))
+    .call(d3.axisBottom(xScale).tickSizeOuter(0));
 
 yTitle = g => g.append("text")
     .attr("font-family", "sans-serif")
     .attr("font-size", 8)
     .attr("y", 6)
-    .text("People in Millions")
+    .text("People in Millions");
 
 
 visArea
