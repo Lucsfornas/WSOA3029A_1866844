@@ -93,15 +93,6 @@ function Mouseoverin(d, i) {
         .attr("fill", "green")
         .attr("r", rad * 2);
 
-    visArea
-        .append("text")
-        .attr({
-            id: "t" + d.value + "-" + i,
-            y: function () { return yScale(d.value) - 15; }
-        })
-        .text(function () {
-            return [d.value];
-        });
 };
 
 
