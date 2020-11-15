@@ -10,28 +10,33 @@ let covdata = covid19data;
 
 let xmargin = 60;
 let topmargin = 10;
-let graphheight = 500;
-let visarea = d3.select("#ExamVis");
+let height = 600;
+let width = 600;
 
-let xScale = d3.scaleLinear().domain([0, 5]).range([0, graphheight]);
-let yScale = d3.scaleLinear().domain([0, 100]).range([graphheight, 0]);
+const margin = ({ top: 20, right: 0, bottom: 30, left: 50 });
+
+const visAreaExam = d3.select("#ExamVis")
+    .attr("viewBox", [0, 0, width, height]);
+
+let xScale = d3.scaleLinear().domain([0, 5]).range([0, height]);
+let yScale = d3.scaleLinear().domain([0, 100]).range([height, 0]);
 /*16000000*/
 
 /*scales*/
 
-visarea
+visAreaExam
     .append('g')
-    .attr("transform", `translate(${xmargin},${graphheight + topmargin})`)
+    .attr("transform", `translate(${xmargin},${height + topmargin})`)
     .call(d3.axisBottom(xScale));
 
-visarea
+visAreaExam
     .append('g')
     .attr("transform", `translate(${xmargin},${topmargin})`)
     .call(d3.axisLeft(yScale));
 
 /*visualisation*/
 
-visarea
+visAreaExam
     .append('g')
     .selectAll('dots')
     .data(covdata)

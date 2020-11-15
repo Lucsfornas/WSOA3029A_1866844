@@ -9,6 +9,7 @@ let covid19data = [
 const width = 500;
 const height = 250;
 
+
 const margin = ({ top: 20, right: 0, bottom: 30, left: 55 });
 
 // work out scales
@@ -42,6 +43,7 @@ console.log(yScale);
 console.log(xScale);
 console.log(covid19data);
 
+
 // create graph
 const visArea2 = d3.select("#visualisation2")
     .attr("viewBox", [0, 0, width, height]);
@@ -55,7 +57,12 @@ visArea2
     .attr("x", d => xScale(d.type))
     .attr("y", d => yScale(d.value))
     .attr("height", d => yScale(0) - yScale(d.value))
-    .attr("width", xScale.bandwidth());
+    .attr("width", xScale.bandwidth())
+    .on("mouseover", d => {
+        showTools(d.type, [xScale(d.type), yScale(d.value)])
+    })
+    .on("mouseout", d => { d3.select("#Tools").style("display", "none"); });
+
 
 visArea2
     .append("g")
@@ -67,6 +74,20 @@ visArea2
 
 visArea2
     .call(yTitle);
+
+
+// showtools function 
+
+
+function showTools(text, []) {
+
+    d3.select("#Tools")
+        .text(text)
+        .style("top", [1])
+        .style("left", [0])
+        .style("display", "block");
+
+}
 
 
 

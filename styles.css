@@ -380,3 +380,13 @@ padding: 0;
 .label{
     fill: #37505c;
 }
+
+/* visualisation 2 tool  */
+
+#Tools{
+    border: solid 0.5em black;
+    padding: 5em;
+    position: absolute;
+    display: none;
+}
+

@@ -92,7 +92,17 @@ function piedata() {
         .attr("fill", function (d, i) {
             return color(i);
         })
-        .attr("d", arc);
-
-
+        .attr("d", arc)
+        .on('mouseover', function (d, i) {
+            d3.select(this)
+                .transition()
+                .duration('50')
+                .attr('opacity', '.85');
+        })
+        .on('mouseout', function (d, i) {
+            d3.select(this)
+                .transition()
+                .duration('50')
+                .attr('opacity', '1');
+        });
 }

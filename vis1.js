@@ -6,7 +6,7 @@
 //     { x: 64, y: 9105030 },
 // ]
 
-let covid19data = [
+const covid19data = [
     { id: 'd1', type: "Total Confirmed cases", value: 15085083 }, /*15085083 */
     { id: 'd2', type: 'Active Cases', value: 5361549 }, /*5361549 */
     { id: 'd3', type: 'Critical Cases', value: 63786 }, /* 63786*/
@@ -36,14 +36,14 @@ const visArea = d3.select("#visualisation")
 //     .attr("transform", 'translate (50,500)')
 //     .call(d3.axisBottom(xScale));
 
-let xScale = d3.scaleBand()
+const xScale = d3.scaleBand()
     .domain(covid19data.map(d => d.type))
     .rangeRound([margin.left, width - margin.right])
     .padding(0.1)
 
 
 
-let yScale = d3.scaleLinear()
+const yScale = d3.scaleLinear()
     .domain([0, d3.max(covid19data, d => d.value)])
     .range([height - margin.bottom, margin.top]);
 
@@ -87,13 +87,24 @@ visArea
 visArea
     .call(yTitle);
 
-function Mouseoverin() {
+function Mouseoverin(d, i) {
 
     d3.select(this)
         .attr("fill", "green")
         .attr("r", rad * 2);
 
+    visArea
+        .append("text")
+        .attr({
+            id: "t" + d.value + "-" + i,
+            y: function () { return yScale(d.value) - 15; }
+        })
+        .text(function () {
+            return [d.value];
+        });
 };
+
+
 
 function Mouseoverout() {
 
