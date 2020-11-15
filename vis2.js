@@ -7,62 +7,66 @@ let covid19data = [
 ]
 
 const width = 500;
-const height = 400;
+const height = 250;
 
 const margin = ({ top: 20, right: 0, bottom: 30, left: 55 });
 
-let x = d3.scaleBand()
+// work out scales
+let xScale = d3.scaleBand()
     .domain(covid19data.map(d => d.type))
     .rangeRound([margin.left, width - margin.right])
     .padding(0.1)
 
 
-
-let y = d3.scaleLinear()
+let yScale = d3.scaleLinear()
     .domain([0, d3.max(covid19data, d => d.value)])
     .range([height - margin.bottom, margin.top]);
 
-
+// create axis
 yAxis = g => g
     .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y).ticks(null, "M"))
+    .call(d3.axisLeft(yScale).ticks(null, "M"))
     .call(g => g.select(".domain").remove())
 
 xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x).tickSizeOuter(0))
+    .call(d3.axisBottom(xScale).tickSizeOuter(0))
 
 yTitle = g => g.append("text")
     .attr("font-family", "sans-serif")
-    .attr("font-size", 10)
-    .attr("y", 10)
+    .attr("font-size", 8)
+    .attr("y", 6)
     .text("People in Millions")
 
-console.log(y);
-console.log(x);
+console.log(yScale);
+console.log(xScale);
 console.log(covid19data);
 
-
-const svg = d3.select("#visualisation2")
+// create graph
+const visArea2 = d3.select("#visualisation2")
     .attr("viewBox", [0, 0, width, height]);
 
-svg.append("g")
+visArea2
+    .append("g")
     .attr("fill", "steelblue")
     .selectAll("rect")
     .data(covid19data)
     .join("rect")
-    .attr("x", d => x(d.type))
-    .attr("y", d => y(d.value))
-    .attr("height", d => y(0) - y(d.value))
-    .attr("width", x.bandwidth());
+    .attr("x", d => xScale(d.type))
+    .attr("y", d => yScale(d.value))
+    .attr("height", d => yScale(0) - yScale(d.value))
+    .attr("width", xScale.bandwidth());
 
-svg.append("g")
+visArea2
+    .append("g")
     .call(xAxis);
 
-svg.append("g")
+visArea2
+    .append("g")
     .call(yAxis);
 
-svg.call(yTitle);
+visArea2
+    .call(yTitle);
 
 
 
