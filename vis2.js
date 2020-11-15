@@ -1,95 +1,70 @@
 let covid19data = [
-    { id: 'd1', type: 'totalconfirmed', value: 15 }, /*15085083 */
-    { id: 'd2', type: 'totalactive', value: 12 }, /*5361549 */
-    { id: 'd3', type: 'totalcritical', value: 11 }, /* 63786*/
-    { id: 'd4', type: 'totaldeaths', value: 6 }, /*618504 */
-    { id: 'd5', type: 'totalrecovered', value: 5 }, /*9105030 */
+    { id: 'd1', type: "Total Confirmed cases", value: 15085083 }, /*15085083 */
+    { id: 'd2', type: 'Active Cases', value: 5361549 }, /*5361549 */
+    { id: 'd3', type: 'Critical Cases', value: 63786 }, /* 63786*/
+    { id: 'd4', type: 'Deaths', value: 618504 }, /*618504 */
+    { id: 'd5', type: 'Recovered Cases', value: 9105030 }, /*9105030 */
 ]
-const margins = { top: 20, bottom: 10 };
-const chart_width = 600;
-const chart_height = 400 - margins.top - margins.bottom;
 
-let selecteddata = covid19data;
+const width = 500;
+const height = 400;
 
-const x = d3.scaleBand().rangeRound([0, chart_width]).padding(0.1);
-const y = d3.scaleLinear().range([chart_height, 0]);
+const margin = ({ top: 20, right: 0, bottom: 30, left: 55 });
 
-const chartcontainer = d3
-    .select('#visualisation2')
-    .attr('width', chart_width)
-    .attr('height', chart_height + margins.top + margins.bottom);
-
-x.domain(covid19data.map((d) => d.type));
-y.domain([0, d3.max(covid19data, d => d.value) + 3]);
-
-const chart = chartcontainer.append('g');
-
-chart
-    .append('g')
-    .call(d3.axisBottom(x))
-    .attr("transform", `translate(20, ${chart_height})`)
-    .attr('color', '#4f009e');
-
-chart
-    .append('g')
-    .call(d3.axisLeft(y))
-    .attr("transform", `translate(20, 0)`)
-    .attr('color', '#4f009e');
-
-function renderchart() {
-
-    chart
-        .selectAll('.bar')
-        .data(selecteddata, data => data.id)
-        .enter()
-        .append('rect')
-        .classed('bar', true)
-        .attr('width', x.bandwidth())
-        .attr('height', (data) => chart_height - y(data.value))
-        .attr('x', (data) => x(data.type))
-        .attr('y', (data) => (data.value));
+let x = d3.scaleBand()
+    .domain(covid19data.map(d => d.type))
+    .rangeRound([margin.left, width - margin.right])
+    .padding(0.1)
 
 
-    chart.selectAll('.bar').data(selecteddata, data => data.id).exit().remove();
 
-    chart
-        .selectAll('.label')
-        .data(selecteddata, data => data.id)
-        .enter()
-        .append('text')
-        .text((data) => data.value)
-        .attr('x', data => x(data.type) + x.bandwidth() / 2)
-        .attr('y', data => (data.value) - 20)
-        .attr('text-anchor', 'middle')
-        .classed('label', true);
+let y = d3.scaleLinear()
+    .domain([0, d3.max(covid19data, d => d.value)])
+    .range([height - margin.bottom, margin.top]);
 
-    chart.selectAll('.label').data(selecteddata, data => data.id).exit().remove();
-}
 
-renderchart();
+yAxis = g => g
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(null, "M"))
+    .call(g => g.select(".domain").remove())
 
-let unselectedid = [];
+xAxis = g => g
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).tickSizeOuter(0))
 
-const listitems = d3
-    .select('#datavis2')
-    .select('ul')
-    .selectAll('li')
+yTitle = g => g.append("text")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", 10)
+    .attr("y", 10)
+    .text("People in Millions")
+
+console.log(y);
+console.log(x);
+console.log(covid19data);
+
+
+const svg = d3.select("#visualisation2")
+    .attr("viewBox", [0, 0, width, height]);
+
+svg.append("g")
+    .attr("fill", "steelblue")
+    .selectAll("rect")
     .data(covid19data)
-    .enter()
-    .append('li');
+    .join("rect")
+    .attr("x", d => x(d.type))
+    .attr("y", d => y(d.value))
+    .attr("height", d => y(0) - y(d.value))
+    .attr("width", x.bandwidth());
 
-listitems.append('span').text((data) => data.type);
+svg.append("g")
+    .call(xAxis);
 
-listitems
-    .append('input')
-    .attr('type', 'checkbox')
-    .attr('checked', true)
-    .on('change', (data) => {
-        if (unselectedid.indexOf(data.id) === -1) {
-            unselectedid.push(data.id);
-        } else {
-            unselectedid = unselectedid.filter(id => id !== data.id);
-        }
-        selecteddata = covid19data.filter((d) => unselectedid.indexOf(d.id) == -1);
-        renderchart();
-    });
+svg.append("g")
+    .call(yAxis);
+
+svg.call(yTitle);
+
+
+
+
+
