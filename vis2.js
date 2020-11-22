@@ -76,7 +76,7 @@ visArea2
     .call(yTitle);
 
 
-// showtools function 
+// showtools function show complete
 
 
 function showTools(text, []) {
