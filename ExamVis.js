@@ -6,40 +6,50 @@ let covid19data = [
     { type: 5, value: 50 }, /*9105030 recovered*/
 ]
 
-let covdata = covid19data;
 
-let xmargin = 60;
-let topmargin = 10;
-let height = 600;
-let width = 600;
+const width = 600;
+const height = 300;
 
-const margin = ({ top: 20, right: 0, bottom: 30, left: 50 });
 
-const visAreaExam = d3.select("#ExamVis")
-    .attr("viewBox", [0, 0, width, height]);
+const margin = ({ top: 20, right: 0, bottom: 30, left: 55 });
 
-let xScale = d3.scaleLinear().domain([0, 5]).range([0, height]);
-let yScale = d3.scaleLinear().domain([0, 100]).range([height, 0]);
-/*16000000*/
+// work out scales
 
-/*scales*/
+let xScale = d3.scaleBand()
+    .domain(covid19data.map(d => d.type))
+    .rangeRound([margin.left, width - margin.right])
+    .padding(0.1)
 
-visAreaExam
-    .append('g')
-    .attr("transform", `translate(${xmargin},${height + topmargin})`)
-    .call(d3.axisBottom(xScale));
 
-visAreaExam
-    .append('g')
-    .attr("transform", `translate(${xmargin},${topmargin})`)
-    .call(d3.axisLeft(yScale));
+let yScale = d3.scaleLinear()
+    .domain([0, d3.max(covid19data, d => d.value)])
+    .range([height - margin.bottom, margin.top]);
+
+// create axis
+
+yAxis = g => g
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(yScale).ticks(null, "M"))
+    .call(g => g.select(".domain").remove())
+
+xAxis = g => g
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(xScale).tickSizeOuter(0))
+
+yTitle = g => g.append("text")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", 8)
+    .attr("y", 6)
+    .text("People in Millions")
 
 /*visualisation*/
+const visAreaExam = d3.select("#ExamVis")
+    .attr("viewBox", [0, 0, width, height]);
 
 visAreaExam
     .append('g')
     .selectAll('dots')
-    .data(covdata)
+    .data(covid19data)
     .enter()
     .append("circle")
     .attr("cx", function (d) {
@@ -49,6 +59,17 @@ visAreaExam
         return yScale(d.value);
     })
     .attr("r", 7);
+
+visAreaExam
+    .append("g")
+    .call(xAxis);
+
+visAreaExam
+    .append("g")
+    .call(yAxis);
+
+visAreaExam
+    .call(yTitle);
 
 d3.selectAll("circle").attr("fill", "red");
 
