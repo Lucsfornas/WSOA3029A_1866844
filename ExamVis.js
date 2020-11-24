@@ -5,16 +5,32 @@ let heig = 500;
 
 const margin = ({ top: 20, right: 0, bottom: 30, left: 55 });
 
-const data1 = [
-    { ser1: 1, ser2: 4 },
-    { ser1: 2, ser2: 16 },
-    { ser1: 3, ser2: 8 }
+const SAcoviddata = [
+    { ser1: 1, ser2: 0 },
+    { ser1: 2, ser2: 0 },
+    { ser1: 3, ser2: 1326 },
+    { ser1: 4, ser2: 5350 },
+    { ser1: 5, ser2: 27403 },
+    { ser1: 6, ser2: 144264 },
+    { ser1: 7, ser2: 471123 },
+    { ser1: 8, ser2: 622551 },
+    { ser1: 9, ser2: 674339 },
+    { ser1: 10, ser2: 723682 },
+    { ser1: 11, ser2: 767679 }
 ];
 
-const data2 = [
-    { ser1: 1, ser2: 7 },
-    { ser1: 4, ser2: 1 },
-    { ser1: 6, ser2: 8 }
+const UScoviddata = [
+    { ser1: 1, ser2: 10 },
+    { ser1: 2, ser2: 66 },
+    { ser1: 3, ser2: 140640 },
+    { ser1: 4, ser2: 1003974 },
+    { ser1: 5, ser2: 1694864 },
+    { ser1: 6, ser2: 2537636 },
+    { ser1: 7, ser2: 4323160 },
+    { ser1: 8, ser2: 5855521 },
+    { ser1: 9, ser2: 7044327 },
+    { ser1: 10, ser2: 8852730 },
+    { ser1: 11, ser2: 11972556 }
 ];
 
 
@@ -97,7 +113,7 @@ function update(data) {
 
 }
 
-update(data1)
+update(SAcoviddata)
 
 
 
