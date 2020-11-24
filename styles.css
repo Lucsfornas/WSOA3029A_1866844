@@ -373,3 +373,10 @@ div.tooltip {
     pointer-events: none;			
 }
 
+/* exam vis styling */
+
+#ExamVis {
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+ }

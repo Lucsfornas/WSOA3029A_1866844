@@ -3,7 +3,7 @@ let wid = 700;
 let heig = 500;
 
 
-const margin = ({ top: 20, right: 0, bottom: 30, left: 55 });
+const margin = ({ top: 20, right: 10, bottom: 40, left: 55 });
 
 const SAPOP2020 = [
     { ser1: 1, ser2: 15488137 },
@@ -64,22 +64,41 @@ let VisAreaExam = d3.select("#ExamVis")
 //     .attr("transform", `translate(0,${heig - margin.bottom})`)
 //     .call(d3.axisBottom(xScale).tickSizeOuter(0));
 
-// yTitle = g => g.append("text")
-//     .attr("font-family", "sans-serif")
-//     .attr("font-size", 8)
-//     .attr("y", 6)
-//     .text("someting cool");
+
+// d3.svg.axis().tickFormat(""); no tick labels
+
+
+GPlabel = g => g.append("text")
+    .attr("transform", "translate(" + (wid / 2) + (10) + " ," +
+        (heig - 9) + ")")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", 8)
+    .style("text-anchor", "middle")
+    .text("GP");
+
+xTitle = g => g.append("text")
+    .attr("transform", "translate(" + (wid / 2) + " ," +
+        (heig - 10) + ")")
+    .style("text-anchor", "middle")
+    .text("Provinces");
+
+yTitle = g => g.append("text")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", 10)
+    .attr("y", 10)
+    .text("People in Province");
+
 
 // X axis
 let x = d3.scaleLinear().rangeRound([margin.left, wid - margin.right]);
-let xAxis = d3.axisBottom().scale(x).tickSize(-500);
+let xAxis = d3.axisBottom().scale(x).tickSize(-440);
 VisAreaExam.append("g")
     .attr("transform", `translate(0,${heig - margin.bottom})`)
     .attr("class", "theXaxis")
 
 // Y axis
 let y = d3.scaleLinear().range([heig - margin.bottom, margin.top]);
-let yAxis = d3.axisLeft().scale(y).tickSize(-700);
+let yAxis = d3.axisLeft().scale(y).tickSize(-635);
 VisAreaExam.append("g")
     .attr("transform", `translate(${margin.left},0)`)
     .attr("class", "theYaxis")
@@ -119,6 +138,15 @@ function update(data) {
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 2.5)
+
+    VisAreaExam
+        .call(yTitle);
+
+    VisAreaExam
+        .call(xTitle);
+
+    VisAreaExam
+        .call(GPlabel);
 
 
 }
