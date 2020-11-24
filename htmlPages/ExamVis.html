@@ -58,13 +58,16 @@
         </div>
 
         <article>
-            <h2>This my Exam Data visualisation made with d3.js libraries displaying covid-19 Statistics.
+            <h2>This my Exam interactive Data visualisation made using d3.js libraries displaying the population in each
+                province in South Africa by selecting each button the graph will display the Covid-19 confirmed cases
+                and deaths in each province.
             </h2>
             <br>
-            <button onclick="update(SAcoviddata)">SA Cases</button>
-            <button onclick="update(UScoviddata)">SA Deaths</button>
-            <button onclick="update(UScoviddata)">US Cases</button>
-            <button onclick="update(UScoviddata)">US Deaths</button>
+            <div class="blogbuttons">
+                <button onclick="update(SAPOP2020)">SA province population</button>
+                <button onclick="update(SAConfirmed)">Province Confirmed Case</button>
+                <button onclick="update(SADeath)">Deaths per province</button>
+            </div>
             <br>
             <svg id="ExamVis" width="700" height="500"></svg>
 

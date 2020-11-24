@@ -5,32 +5,41 @@ let heig = 500;
 
 const margin = ({ top: 20, right: 0, bottom: 30, left: 55 });
 
-const SAcoviddata = [
-    { ser1: 1, ser2: 0 },
-    { ser1: 2, ser2: 0 },
-    { ser1: 3, ser2: 1326 },
-    { ser1: 4, ser2: 5350 },
-    { ser1: 5, ser2: 27403 },
-    { ser1: 6, ser2: 144264 },
-    { ser1: 7, ser2: 471123 },
-    { ser1: 8, ser2: 622551 },
-    { ser1: 9, ser2: 674339 },
-    { ser1: 10, ser2: 723682 },
-    { ser1: 11, ser2: 767679 }
+const SAPOP2020 = [
+    { ser1: 1, ser2: 15488137 },
+    { ser1: 2, ser2: 11531628 },
+    { ser1: 3, ser2: 7005741 },
+    { ser1: 4, ser2: 6734001 },
+    { ser1: 5, ser2: 5852553 },
+    { ser1: 6, ser2: 479786 },
+    { ser1: 7, ser2: 4108816 },
+    { ser1: 8, ser2: 2928903 },
+    { ser1: 9, ser2: 1292786 }
+
 ];
 
-const UScoviddata = [
-    { ser1: 1, ser2: 10 },
-    { ser1: 2, ser2: 66 },
-    { ser1: 3, ser2: 140640 },
-    { ser1: 4, ser2: 1003974 },
-    { ser1: 5, ser2: 1694864 },
-    { ser1: 6, ser2: 2537636 },
-    { ser1: 7, ser2: 4323160 },
-    { ser1: 8, ser2: 5855521 },
-    { ser1: 9, ser2: 7044327 },
-    { ser1: 10, ser2: 8852730 },
-    { ser1: 11, ser2: 11972556 }
+const SAConfirmed = [
+    { ser1: 1, ser2: 233164 },
+    { ser1: 2, ser2: 126130 },
+    { ser1: 3, ser2: 125919 },
+    { ser1: 4, ser2: 118688 },
+    { ser1: 5, ser2: 18408 },
+    { ser1: 6, ser2: 31086 },
+    { ser1: 7, ser2: 34600 },
+    { ser1: 8, ser2: 58796 },
+    { ser1: 9, ser2: 22968 }
+];
+
+const SADeath = [
+    { ser1: 1, ser2: 4970 },
+    { ser1: 2, ser2: 3309 },
+    { ser1: 3, ser2: 4530 },
+    { ser1: 4, ser2: 4379 },
+    { ser1: 5, ser2: 490 },
+    { ser1: 6, ser2: 614 },
+    { ser1: 7, ser2: 549 },
+    { ser1: 8, ser2: 1826 },
+    { ser1: 9, ser2: 301 }
 ];
 
 
@@ -62,15 +71,15 @@ let VisAreaExam = d3.select("#ExamVis")
 //     .text("someting cool");
 
 // X axis
-var x = d3.scaleLinear().rangeRound([margin.left, wid - margin.right]);
-var xAxis = d3.axisBottom().scale(x);
+let x = d3.scaleLinear().rangeRound([margin.left, wid - margin.right]);
+let xAxis = d3.axisBottom().scale(x);
 VisAreaExam.append("g")
     .attr("transform", `translate(0,${heig - margin.bottom})`)
     .attr("class", "theXaxis")
 
 // Y axis
-var y = d3.scaleLinear().range([heig - margin.bottom, margin.top]);
-var yAxis = d3.axisLeft().scale(y);
+let y = d3.scaleLinear().range([heig - margin.bottom, margin.top]);
+let yAxis = d3.axisLeft().scale(y);
 VisAreaExam.append("g")
     .attr("transform", `translate(${margin.left},0)`)
     .attr("class", "theYaxis")
@@ -79,7 +88,7 @@ VisAreaExam.append("g")
 function update(data) {
 
     //Axis x and x
-    x.domain([0, d3.max(data, function (d) { return d.ser1 })]);
+    x.domain([0, d3.scaleBand(data, function (d) { return d.ser1 })]);
     VisAreaExam.selectAll(".theXaxis").transition()
         .duration(3000)
         .call(xAxis);
@@ -92,15 +101,16 @@ function update(data) {
         .call(yAxis);
 
     // select data and line
-    var lineupd = VisAreaExam.selectAll(".theLine")
+    let lineupdate = VisAreaExam.selectAll(".theLine")
         .data([data], function (d) { return d.ser1 });
 
+
     // draw line
-    lineupd
+    lineupdate
         .enter()
         .append("path")
         .attr("class", "theLine")
-        .merge(lineupd)
+        .merge(lineupdate)
         .transition()
         .duration(3000)
         .attr("d", d3.line()
@@ -113,8 +123,9 @@ function update(data) {
 
 }
 
-update(SAcoviddata)
+update(SAPOP2020);
 
+// x.domain([0, d3.max(data, function (d) { return d.ser1 })]);
 
 
 // const datacov = d3.csv("../owid-covid-data.csv", function (data) {
