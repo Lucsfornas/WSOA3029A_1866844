@@ -72,14 +72,14 @@ let VisAreaExam = d3.select("#ExamVis")
 
 // X axis
 let x = d3.scaleLinear().rangeRound([margin.left, wid - margin.right]);
-let xAxis = d3.axisBottom().scale(x);
+let xAxis = d3.axisBottom().scale(x).tickSize(-500);
 VisAreaExam.append("g")
     .attr("transform", `translate(0,${heig - margin.bottom})`)
     .attr("class", "theXaxis")
 
 // Y axis
 let y = d3.scaleLinear().range([heig - margin.bottom, margin.top]);
-let yAxis = d3.axisLeft().scale(y);
+let yAxis = d3.axisLeft().scale(y).tickSize(-700);
 VisAreaExam.append("g")
     .attr("transform", `translate(${margin.left},0)`)
     .attr("class", "theYaxis")
@@ -88,7 +88,7 @@ VisAreaExam.append("g")
 function update(data) {
 
     //Axis x and x
-    x.domain([0, d3.scaleBand(data, function (d) { return d.ser1 })]);
+    x.domain([0, d3.max(data, function (d) { return d.ser1 })]);
     VisAreaExam.selectAll(".theXaxis").transition()
         .duration(3000)
         .call(xAxis);
