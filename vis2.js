@@ -44,6 +44,10 @@ console.log(xScale);
 console.log(covid19data);
 
 
+let div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
 // create graph
 const visArea2 = d3.select("#visualisation2")
     .attr("viewBox", [0, 0, width, height]);
@@ -58,10 +62,19 @@ visArea2
     .attr("y", d => yScale(d.value))
     .attr("height", d => yScale(0) - yScale(d.value))
     .attr("width", xScale.bandwidth())
-    .on("mouseover", d => {
-        showTools(d.type, [xScale(d.type), yScale(d.value)])
+    .on("mouseover", function (d) {
+        div.transition()
+            .duration(200)
+            .style("opacity", .9);
+        div.html(d.value)
+            .style("left", d3.select(this).attr("cx") + "px")
+            .style("top", d3.select(this).attr("cy") + "px");
     })
-    .on("mouseout", d => { d3.select("#Tools").style("display", "none"); });
+    .on("mouseout", function (d) {
+        div.transition()
+            .duration(500)
+            .style("opacity", 0);
+    });
 
 
 visArea2
@@ -76,18 +89,23 @@ visArea2
     .call(yTitle);
 
 
+
+    // .on("mouseover", d => {
+    //     showTools(d.type, [xScale(d.type), yScale(d.value)])
+    // })
+    // .on("mouseout", d => { d3.select("#Tools").style("display", "none"); });
 // showtools function show complete
 
 
-function showTools(text, []) {
+// function showTools(text, []) {
 
-    d3.select("#Tools")
-        .text(text)
-        .style("top", [1])
-        .style("left", [0])
-        .style("display", "block");
+//     d3.select("#Tools")
+//         .text(text)
+//         .style("top", [1])
+//         .style("left", [0])
+//         .style("display", "block");
 
-}
+// }
 
 
 

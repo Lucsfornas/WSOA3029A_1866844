@@ -1,10 +1,3 @@
-// let exampledata = [
-//     { x: 16, y: 15085083 },
-//     { x: 36, y: 5361549 },
-//     { x: 42, y: 63786 },
-//     { x: 48, y: 618504 },
-//     { x: 64, y: 9105030 },
-// ]
 
 const covid19data = [
     { id: 'd1', type: "Total Confirmed cases", value: 15085083 }, /*15085083 */
@@ -23,18 +16,6 @@ const align = 50;
 const visArea = d3.select("#visualisation")
     .attr("viewBox", [0, 0, width, height]);
 
-// let xScale = d3.scaleLinear().domain([0, 100]).range([0, graphheight]);
-// let yScale = d3.scaleLinear().domain([0, 16000000]).range([graphheight, 0]);
-
-// visArea
-//     .append('g')
-//     .attr("transform", 'translate(50, 10)')
-//     .call(d3.axisLeft(yScale));
-
-// visArea
-//     .append('g')
-//     .attr("transform", 'translate (50,500)')
-//     .call(d3.axisBottom(xScale));
 
 const xScale = d3.scaleBand()
     .domain(covid19data.map(d => d.type))
